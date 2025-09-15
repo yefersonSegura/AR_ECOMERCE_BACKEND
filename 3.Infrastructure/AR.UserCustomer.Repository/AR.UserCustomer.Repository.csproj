@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\0.Common\AR.Repository.Base\AR.Repository.Base.csproj" />
+    <ProjectReference Include="..\..\2.Application Core\AR.Core.UserCustomer.Application\AR.Core.UserCustomer.Application.csproj" />
+    <ProjectReference Include="..\..\2.Application Core\AR.Core.UserCustomer.Common\AR.Core.UserCustomer.Common.csproj" />
+  </ItemGroup>
+
+</Project>

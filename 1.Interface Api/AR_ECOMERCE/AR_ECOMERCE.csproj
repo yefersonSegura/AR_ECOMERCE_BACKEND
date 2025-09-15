@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\0.Common\Ar.Common.Transaction\Ar.Common.Transaction.csproj" />
+    <ProjectReference Include="..\..\0.Common\AR.Common\AR.Common.csproj" />
+    <ProjectReference Include="..\..\2.Application Core\AR.Core.Common\AR.Core.Common.csproj" />
+    <ProjectReference Include="..\..\2.Application Core\AR.Core.Customer.Common\AR.Core.Customer.Common.csproj" />
+    <ProjectReference Include="..\..\2.Application Core\AR.Core.Employee.Application\AR.Core.Employee.Application.csproj" />
+    <ProjectReference Include="..\..\2.Application Core\AR.Core.Employee.Common\AR.Core.Employee.Common.csproj" />
+    <ProjectReference Include="..\..\2.Application Core\AR.Core.Promotions.Application\AR.Core.Promotions.Application.csproj" />
+    <ProjectReference Include="..\..\2.Application Core\AR.Core.Promotions.Common\AR.Core.Promotions.Common.csproj" />
+    <ProjectReference Include="..\..\2.Application Core\AR.Core.Purchase.Application\AR.Core.Purchase.Application.csproj" />
+    <ProjectReference Include="..\..\2.Application Core\AR.Core.Purchase.Common\AR.Core.Purchase.Common.csproj" />
+    <ProjectReference Include="..\..\2.Application Core\AR.Core.Purchases.Filters\AR.Core.Purchases.Filters.csproj" />
+    <ProjectReference Include="..\..\2.Application Core\AR.Core.User.Application\AR.Core.User.Application.csproj" />
+    <ProjectReference Include="..\..\2.Application Core\AR.Core.User.Common\AR.Core.User.Common.csproj" />
+    <ProjectReference Include="..\..\2.Application Core\AR.Core.UserCustomer.Application\AR.Core.UserCustomer.Application.csproj" />
+    <ProjectReference Include="..\..\2.Application Core\AR.Core.UserCustomer.Common\AR.Core.UserCustomer.Common.csproj" />
+    <ProjectReference Include="..\..\3.Infrastructure\AR.Customer.Repository\AR.Customer.Repository.csproj" />
+    <ProjectReference Include="..\..\3.Infrastructure\AR.Employee.Repository\AR.Employee.Repository.csproj" />
+    <ProjectReference Include="..\..\3.Infrastructure\AR.Promotions.Repository\AR.Promotions.Repository.csproj" />
+    <ProjectReference Include="..\..\3.Infrastructure\AR.Purchase.Repository\AR.Purchase.Repository.csproj" />
+    <ProjectReference Include="..\..\3.Infrastructure\AR.Transaction.Repository\AR.Transaction.Repository.csproj" />
+    <ProjectReference Include="..\..\3.Infrastructure\AR.User.Repository\AR.User.Repository.csproj" />
+    <ProjectReference Include="..\..\3.Infrastructure\AR.UserCustomer.Repository\AR.UserCustomer.Repository.csproj" />
+    <ProjectReference Include="..\..\AR.Core.Customer.Application\AR.Core.Customer.Application.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\0.Common\Ar.Common.Transaction\Ar.Common.Transaction.csproj" />
+    <ProjectReference Include="..\..\0.Common\AR.Common\AR.Common.csproj" />
+    <ProjectReference Include="..\..\3.Infrastructure\AR.Transaction.Repository\AR.Transaction.Repository.csproj" />
+    <ProjectReference Include="..\AR.Core.Common\AR.Core.Common.csproj" />
+    <ProjectReference Include="..\AR.Core.Purchase.Common\AR.Core.Purchase.Common.csproj" />
+  </ItemGroup>
+
+</Project>

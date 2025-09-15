@@ -1,0 +1,6 @@
+@AR_ECOMERCE_HostAddress = http://localhost:5118
+
+GET {{AR_ECOMERCE_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
