@@ -1,15 +1,8 @@
 ﻿using AR.Common;
 using AR.Common.Dto;
-using AR.Core.Purchase.Application;
-using AR.Core.Purchase.Common.ViewModels;
-using AR.Core.User.Application;
 using AR.Core.User.Common.Dto;
 using AR.Core.User.Common.Interfaces;
 using AR.Core.User.Common.ViewModels;
-using AR.Core.UserCustomer.Application;
-using AR.Core.UserCustomer.Common.Dto;
-using AR.Core.UserCustomer.Common.ViewModels;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
