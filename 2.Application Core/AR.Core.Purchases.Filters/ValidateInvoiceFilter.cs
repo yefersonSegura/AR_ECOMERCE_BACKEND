@@ -26,7 +26,7 @@ public class ValidateInvoiceFilter : BaseFilter
                 await SendError(context, "No se encuentra el  tipo de documento a generar");
                 return;
             }
-            if (model.items.Any())
+            if (!model.items.Any())
             {
                 await SendError(context, "No se encontro productos para generar la operación");
                 return;

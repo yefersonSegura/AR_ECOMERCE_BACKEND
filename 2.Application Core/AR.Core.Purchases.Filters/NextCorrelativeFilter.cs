@@ -18,7 +18,7 @@ public class NextCorrelativeFilter : BaseFilter
     {
         try
         {
-            var result = await transactionRepository.NextNumber(context.Document.DocumentId);
+            var result = await transactionRepository.NextNumber(context.Document.transaction.DocumentType.Id);
             if (!result.IsSuccessful)
             {
                 await SendError(context, "Error al  generar correlativo del documento");

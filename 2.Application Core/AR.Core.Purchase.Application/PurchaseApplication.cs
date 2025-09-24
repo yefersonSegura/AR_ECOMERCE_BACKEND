@@ -29,10 +29,13 @@ public class PurchaseApplication : IPurchaseApplication
                 return result;
             }
 
-            invoice.transaction.Operation = new AR.Common.domain.OperationDto()
+            invoice.transaction = new AR.Common.domain.TransactionInfo
             {
-                id = (int)resultTransaction.Id!,
-                name = resultTransaction.Label,
+                Operation = new AR.Common.domain.OperationDto()
+                {
+                    id = (int)resultTransaction.Value!,
+                    name = resultTransaction.Code,
+                }
             };
 
             invoice.transaction.DocumentType = new DocumentTypeByOperationDto() { DocumentTypeCode = "BOL" };
@@ -48,7 +51,7 @@ public class PurchaseApplication : IPurchaseApplication
             {
                 await shoppingCartApplication.RemoveProductOfShoppingCart(invoice.userId, item.productID);
             }
-            
+
             result.IsSuccessful = response.IsSuccessful;
             result.Message = response.Message;
         }
