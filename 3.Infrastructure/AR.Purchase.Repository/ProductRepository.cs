@@ -1,15 +1,18 @@
 ﻿using AR.Common.Dto;
+using AR.Core.Common.ViewModels;
 using AR.Core.Purchase.Common.Dto;
 using AR.Core.Purchase.Common.Interfaces;
 using AR.Core.Purchase.Common.ViewModels;
 using AR.Repository.Base;
+using Azure;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing.Printing;
 using System.Runtime.ExceptionServices;
 
 namespace AR.Purchase.Repository
 {
-    public class ProductRepository : EntityRepository, IProductRepository , ICategoryRepository
+    public class ProductRepository : EntityRepository, IProductRepository, ICategoryRepository
     {
         public ProductRepository(string connectionString) : base(connectionString)
         {
@@ -103,7 +106,7 @@ namespace AR.Purchase.Repository
             {
                 ExceptionDispatchInfo.Capture(new Exception(ex.Message)).Throw();
             }
-            return  response;
+            return response;
         }
 
         public async Task<BaseResponseDto> DeleteProducts(int productID)
@@ -161,16 +164,19 @@ namespace AR.Purchase.Repository
             return response;
         }
 
-        public async Task<List<CategoryDto>> GetCategory()
+        public async Task<PagedResponseDto<CategoryDto>> GetCategory(QueryCategoriesViewModel query)
         {
-            var categoryList = new List<CategoryDto>();
-            var response = new ResponseDto<List<CategoryDto>>();
+            var response = new PagedResponseDto<CategoryDto>() {  Data =  new List<CategoryDto> ()};
             try
             {
                 using (var con = new SqlConnection(connectionString))
                 {
                     SqlCommand sql = new SqlCommand("sp_listCategories", con);
                     sql.CommandType = CommandType.StoredProcedure;
+                    sql.Parameters.AddWithValue("@IDCategory", query.CategoryId);
+                    sql.Parameters.AddWithValue("@Page", query.Page);
+                    sql.Parameters.AddWithValue("@PageSize", query.PageSize);
+                    sql.Parameters.AddWithValue("@text", query.CategoryName);
 
                     con.Open();
                     SqlDataReader dr = await sql.ExecuteReaderAsync();
@@ -189,7 +195,11 @@ namespace AR.Purchase.Repository
                                 categoryName = dr.IsDBNull(col1) ? string.Empty : dr.GetString(col1),
                                 Description = dr.IsDBNull(col2) ? string.Empty : dr.GetString(col2)
                             };
-                            categoryList.Add(model);
+                            response.Data.Add(model);
+                        }
+                        if (dr.NextResult() && dr.Read())
+                        {
+                            response.Total = Convert.ToInt32(dr["TotalRecords"]);
                         }
                     }
 
@@ -201,7 +211,7 @@ namespace AR.Purchase.Repository
             {
                 ExceptionDispatchInfo.Capture(ex.InnerException!).Throw();
             }
-            return categoryList;
+            return response;
         }
 
         public async Task<BaseResponseDto> SaveCategories(CategoryViewModels categoryViewModels)
@@ -291,7 +301,7 @@ namespace AR.Purchase.Repository
             return productList;
         }
 
-        public async  Task<List<PromotionDto>> GetPromotion(DateTime date)
+        public async Task<List<PromotionDto>> GetPromotion(DateTime date)
         {
             var promotionList = new List<PromotionDto>();
             try
@@ -325,12 +335,12 @@ namespace AR.Purchase.Repository
                                 IdPromotion = dr.IsDBNull(col0) ? 0 : dr.GetInt32(col0),
                                 Title = dr.IsDBNull(col1) ? string.Empty : dr.GetString(col1),
                                 Description = dr.IsDBNull(col2) ? string.Empty : dr.GetString(col2),
-                                StartDate= dr.IsDBNull(col3)?null:dr.GetDateTime(col3),
-                                EndDate=  dr.IsDBNull(col4)?null:dr.GetDateTime(col4),
-                                CategoryId= dr.IsDBNull(col5)?0:dr.GetInt32(col5),
-                                ProductId=dr.IsDBNull(col6)?0:dr.GetInt32(col6),
-                                Discount=dr.IsDBNull(col7)?0:dr.GetDecimal(col7),
-                                Color=dr.IsDBNull(col8)?"":dr.GetString(col8),
+                                StartDate = dr.IsDBNull(col3) ? null : dr.GetDateTime(col3),
+                                EndDate = dr.IsDBNull(col4) ? null : dr.GetDateTime(col4),
+                                CategoryId = dr.IsDBNull(col5) ? 0 : dr.GetInt32(col5),
+                                ProductId = dr.IsDBNull(col6) ? 0 : dr.GetInt32(col6),
+                                Discount = dr.IsDBNull(col7) ? 0 : dr.GetDecimal(col7),
+                                Color = dr.IsDBNull(col8) ? "" : dr.GetString(col8),
                                 UrlImage = dr.IsDBNull(col9) ? "" : dr.GetString(col9)
                             };
                             promotionList.Add(model);

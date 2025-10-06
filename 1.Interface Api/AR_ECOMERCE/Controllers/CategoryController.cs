@@ -1,4 +1,5 @@
 ﻿using AR.Common.Dto;
+using AR.Core.Common.ViewModels;
 using AR.Core.Purchase.Common.Dto;
 using AR.Core.Purchase.Common.Interfaces;
 using AR.Core.Purchase.Common.ViewModels;
@@ -8,18 +9,18 @@ namespace AR_ECOMERCE.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-   public class CategoryController : ControllerBase
-   {
+    public class CategoryController : ControllerBase
+    {
         private readonly ICategoryApplication categoryApplication;
-        public CategoryController( ICategoryApplication categoryApplication)
+        public CategoryController(ICategoryApplication categoryApplication)
         {
             this.categoryApplication = categoryApplication;
         }
 
-        [HttpGet("GetCategories")]
-        public Task<ResponseDto<List<CategoryDto>>> GetCategories()
+        [HttpPost("GetCategories")]
+        public async Task<PagedResponseDto<CategoryDto>> GetCategory([FromBody]QueryCategoriesViewModel query)
         {
-            return categoryApplication.GetCategory();
+            return await categoryApplication.GetCategory(query);
         }
 
         [HttpPost("SaveCategories")]

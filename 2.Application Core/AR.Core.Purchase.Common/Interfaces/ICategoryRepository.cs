@@ -1,4 +1,5 @@
 ﻿using AR.Common.Dto;
+using AR.Core.Common.ViewModels;
 using AR.Core.Purchase.Common.Dto;
 using AR.Core.Purchase.Common.ViewModels;
 using System;
@@ -11,7 +12,7 @@ namespace AR.Core.Purchase.Common.Interfaces
 {
     public interface ICategoryRepository
     {
-        Task<List<CategoryDto>> GetCategory();
+        Task<PagedResponseDto<CategoryDto>> GetCategory(QueryCategoriesViewModel query);
         Task<BaseResponseDto> SaveCategories(CategoryViewModels categoryViewModels);
         Task<BaseResponseDto> DeleteCategories(int categoryID);
     }

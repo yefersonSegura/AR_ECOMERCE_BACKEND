@@ -1,6 +1,7 @@
 ﻿using AR.Common.Dto;
 using AR.Common.Functions;
 using AR.Common.InterfacesFirabase;
+using AR.Core.Common.ViewModels;
 using AR.Core.Purchase.Common.Dto;
 using AR.Core.Purchase.Common.Interfaces;
 using AR.Core.Purchase.Common.ViewModels;
@@ -99,12 +100,12 @@ namespace AR.Core.Purchase.Application
             return result;
         }
 
-        public async Task<ResponseDto<List<CategoryDto>>> GetCategory()
+        public async Task<PagedResponseDto<CategoryDto>> GetCategory(QueryCategoriesViewModel query)
         {
-            ResponseDto<List<CategoryDto>> result = new ResponseDto<List<CategoryDto>>();
+            PagedResponseDto<CategoryDto> result = new PagedResponseDto<CategoryDto>();
             try
             {
-                result.Data = await categoryRepository.GetCategory();
+                result = await categoryRepository.GetCategory(query);
                 result.IsSuccessful = true;
             }
             catch (Exception ex)
